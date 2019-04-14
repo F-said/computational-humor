@@ -41,13 +41,24 @@ class infoWeb:
         result = cp.parse(pos_tag)
 
         # Return all noun-phrases
-        for index, r in enumerate(result):
-            if type(r) == nltk.tree.Tree and type(result[index + 1]):
-                self.subject_list.append(r)
-            elif type(r) == nltk.tree.Tree:
-                self.subject_list.append(r)
+        self.subject_list = self.extractPhrases(result, 'NP')
 
         return self.subject_list
+
+    # Function to extract noun phrases taken from https://www.winwaed.com/blog/2012/01/20/extracting-noun-phrases-from-parsed-trees/
+    def extractPhrases(self, myTree, phrase):
+        phrases = []
+
+        if myTree.label() == phrase:
+            phrases.append(myTree.copy(True))
+
+        for child in myTree:
+            if type(child) is nltk.tree.Tree:
+                list_of_phrases = self.extractPhrases(child, phrase)
+                if len(list_of_phrases) > 0:
+                    phrases.extend(list_of_phrases)
+
+        return phrases
 
     def confirmSubject(self, subject):
         self.subject = subject
