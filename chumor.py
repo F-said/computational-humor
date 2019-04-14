@@ -8,10 +8,11 @@ def main():
 
     # Pass expectation to function that creates graph of expectations
     chumor = infoWeb(prompt)
+    chumor.getSubject()
 
     # Get help from human to make sure subject matter is correct
     print("Please confirm if subject is correct\n")
-    subject_matters = chumor.getSubject()
+    subject_matters = chumor.initialSearch()
     for s in subject_matters:
         potential_answer = s
         print("Is ", potential_answer, " the subject of this sentence?\n")

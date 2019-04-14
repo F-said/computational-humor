@@ -20,7 +20,7 @@ class infoWeb:
     def getSubject(self):
         """
         Function to get list of noun phrases of the prompt. To be passed to first wikipedia and then to narrow selection
-        user to narrow subject matter selection. 
+        user to narrow subject matter selection.
         :return: A list of noun phrases
         """
         # Tokenize words
@@ -53,8 +53,6 @@ class infoWeb:
                 addend.append(str(phrase[i][0]))
             self.subject_list.append(' '.join(addend))
 
-        return self.subject_list
-
     # Function to extract noun phrases taken from
     # https://www.winwaed.com/blog/2012/01/20/extracting-noun-phrases-from-parsed-trees/
     def extractPhrases(self, myTree, phrase):
@@ -73,6 +71,19 @@ class infoWeb:
 
     def confirmSubject(self, subject):
         self.subject = subject
+
+    def initialSearch(self):
+        main_subjects = []
+
+        # For each subject found in the prompt, do an initial search in Wikipedia.
+        for subject in self.subject_list:
+            search_results = wikipedia.search(subject)
+            # For each result that was found
+            for result in search_results:
+                # Convert it into a list
+                list_result = result.split(sep=" ")
+
+        return main_subjects
 
     def createWeb(self):
         self.web = None
