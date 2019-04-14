@@ -1,5 +1,4 @@
 import nltk
-from nltk import ne_chunk
 from nltk.corpus import stopwords
 import wikipedia
 
@@ -19,6 +18,11 @@ class infoWeb:
         self.humor_detected = False
 
     def getSubject(self):
+        """
+        Function to get list of noun phrases of the prompt. To be passed to first wikipedia and then to narrow selection
+        user to narrow subject matter selection. 
+        :return: A list of noun phrases
+        """
         # Tokenize words
         words = nltk.tokenize.word_tokenize(self.prompt)
 
@@ -41,11 +45,18 @@ class infoWeb:
         result = cp.parse(pos_tag)
 
         # Return all noun-phrases
-        self.subject_list = self.extractPhrases(result, 'NP')
+        noun_phrases = self.extractPhrases(result, 'NP')
+
+        for phrase in noun_phrases:
+            addend = []
+            for i in range(len(phrase.leaves())):
+                addend.append(str(phrase[i][0]))
+            self.subject_list.append(' '.join(addend))
 
         return self.subject_list
 
-    # Function to extract noun phrases taken from https://www.winwaed.com/blog/2012/01/20/extracting-noun-phrases-from-parsed-trees/
+    # Function to extract noun phrases taken from
+    # https://www.winwaed.com/blog/2012/01/20/extracting-noun-phrases-from-parsed-trees/
     def extractPhrases(self, myTree, phrase):
         phrases = []
 
