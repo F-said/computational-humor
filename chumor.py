@@ -26,6 +26,7 @@ def main():
         print("Subject failed to be found. Exiting.")
         return 1
 
+    """
     # Check if outcome subverts expectation
     punch = input("Input outcome:")
     # If outcome does not subvert expectations, exit program
@@ -35,6 +36,7 @@ def main():
 
     if chumor.detectHumor():
         print("Humor ✔")
+    """
 
 
 if __name__ == "__main__":

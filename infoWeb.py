@@ -19,8 +19,8 @@ class infoWeb:
 
     def getSubject(self):
         """
-        Function to get list of noun phrases of the prompt. To be passed to first wikipedia and then to narrow selection
-        user to narrow subject matter selection.
+        Function to get list of noun phrases of the prompt. To be passed to Wikipedia and then to user to narrow
+        subject matter selection.
         :return: A list of noun phrases
         """
         # Tokenize words
@@ -82,6 +82,12 @@ class infoWeb:
             for result in search_results:
                 # Convert it into a list
                 list_result = result.split(sep=" ")
+                # Make list lower case
+                list_result = [x.lower() for x in list_result]
+
+                for other_subject in self.subject_list:
+                    if (other_subject in list_result) and (other_subject != subject):
+                        main_subjects.append(" ".join(list_result))
 
         return main_subjects
 
