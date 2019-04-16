@@ -2,7 +2,7 @@ from infoWeb import infoWeb
 
 
 def main():
-    ans = ''
+    ans = 'n'
     # Get prompt from user
     prompt = input("Input prompt:")
 
@@ -16,7 +16,7 @@ def main():
     for s in subject_matters:
         potential_answer = s
         print("Is ", potential_answer, " the subject of this sentence?\n")
-        ans = input("Input y for yes or n for no.")
+        ans = input("Input y for yes or n for no:")
         if ans is "y":
             chumor.confirmSubject(s)
             print("Thank you for your assistance.")
@@ -26,7 +26,6 @@ def main():
         print("Subject failed to be found. Exiting.")
         return 1
 
-    """
     # Check if outcome subverts expectation
     punch = input("Input outcome:")
     # If outcome does not subvert expectations, exit program
@@ -36,7 +35,6 @@ def main():
 
     if chumor.detectHumor():
         print("Humor ✔")
-    """
 
 
 if __name__ == "__main__":

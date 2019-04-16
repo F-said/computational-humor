@@ -71,6 +71,8 @@ class infoWeb:
 
     def confirmSubject(self, subject):
         self.subject = subject
+        # Once subject is confirmed, create the web
+        self.createWeb()
 
     def initialSearch(self):
         main_subjects = []
@@ -86,14 +88,15 @@ class infoWeb:
                 list_result = [x.lower() for x in list_result]
 
                 for other_subject in self.subject_list:
-                    if (other_subject in list_result) and (other_subject != subject):
+                    if other_subject in list_result:
                         main_subjects.append(" ".join(list_result))
 
         return main_subjects
 
     def createWeb(self):
-        self.web = None
-        return None
+        wiki_page = wikipedia.page(self.subject)
+        self.web = wiki_page.content
+
 
     def detectSubversion(self, outcome):
         self.subvert_nodes = None
