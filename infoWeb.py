@@ -128,7 +128,29 @@ class infoWeb:
                 except ValueError:
                     continue
 
-        
+        # Remove duplicate indices
+        indices = list(set(indices))
+
+        outcomes = []
+        for index in indices:
+            atomic_outcome = []
+            for i in range(index, len(self.web)):
+                if (self.web[i][-1] is ".") or (self.web[i][-1] is ",") or (self.web[i][-1] is ";") or \
+                        (self.web[i][-1] is "?") or (self.web[i][-1] is "!"):
+                    break
+                atomic_outcome.append(self.web[i])
+            outcomes.append(atomic_outcome)
+
+        # Split and stem the outcome to match the web
+        outcome = outcome.split(sep=" ")
+
+        ps = PorterStemmer()
+        outcome = [ps.stem(word) for word in outcome]
+
+        for ending in outcomes:
+            if set(outcome).issubset(ending):
+                self.subvert = False
+        self.subvert = True
 
         return self.subvert
 
