@@ -32,9 +32,11 @@ def main():
     if not (chumor.detectSubversion(punch)):
         print("Humor ✘")
         return
-
+    print("Humor ✔")
+    """
     if chumor.detectHumor():
         print("Humor ✔")
+    """
 
 
 if __name__ == "__main__":

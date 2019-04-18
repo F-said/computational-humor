@@ -100,7 +100,6 @@ class infoWeb:
         self.web = wiki_page.content
         # Get references to use for later
         self.ref = wiki_page.references
-        self.ref = self.ref.split(sep=" ")
 
         # Split web as a list
         self.web = self.web.split(sep=" ")
@@ -168,5 +167,4 @@ class infoWeb:
         stop = stopwords.words('english')
         self.outcome = [word.lower() for word in self.outcome if word not in stop]
 
-        if set(self.outcome).issubset(self.web) or set(self.outcome).issubset(self.ref):
-            return True
+        # TODO: Detect difference between humorous subversion and non-humorous subversion
