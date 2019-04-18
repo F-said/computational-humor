@@ -100,6 +100,7 @@ class infoWeb:
         self.web = wiki_page.content
         # Get references to use for later
         self.ref = wiki_page.references
+        self.ref = self.ref.split(sep=" ")
 
         # Split web as a list
         self.web = self.web.split(sep=" ")
@@ -112,8 +113,9 @@ class infoWeb:
         self.context = [ps.stem(word) for word in self.context]
 
     def detectSubversion(self, outcome):
-        # Save outcome to check for humor apart from subversion 
+        # Save outcome to check for humor apart from subversion
         self.outcome = outcome
+        self.outcome = self.outcome.split(sep=" ")
 
         fragments = []
         # Get all subsets of prompt
@@ -166,3 +168,5 @@ class infoWeb:
         stop = stopwords.words('english')
         self.outcome = [word.lower() for word in self.outcome if word not in stop]
 
+        if set(self.outcome).issubset(self.web) or set(self.outcome).issubset(self.ref):
+            return True
