@@ -12,7 +12,9 @@ class infoWeb:
         self.subject_list = []
 
         self.context = None
+        self.ref = None
         self.web = None
+        self.outcome = None
 
         self.subvert = False
         self.humor_detected = False
@@ -96,6 +98,8 @@ class infoWeb:
     def createWeb(self):
         wiki_page = wikipedia.page(self.subject)
         self.web = wiki_page.content
+        # Get references to use for later
+        self.ref = wiki_page.references
 
         # Split web as a list
         self.web = self.web.split(sep=" ")
@@ -108,6 +112,9 @@ class infoWeb:
         self.context = [ps.stem(word) for word in self.context]
 
     def detectSubversion(self, outcome):
+        # Save outcome to check for humor apart from subversion 
+        self.outcome = outcome
+
         fragments = []
         # Get all subsets of prompt
         for index, word in enumerate(self.context):
@@ -155,4 +162,7 @@ class infoWeb:
         return self.subvert
 
     def detectHumor(self):
-        return self.humor_detected
+        # Remove stop words from outcome
+        stop = stopwords.words('english')
+        self.outcome = [word.lower() for word in self.outcome if word not in stop]
+
