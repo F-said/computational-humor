@@ -97,6 +97,9 @@ class infoWeb:
         wiki_page = wikipedia.page(self.subject)
         self.web = wiki_page.content
 
+        # Split web as a list
+        self.web = self.web.split(sep=" ")
+
         # Get stem of wiki article
         ps = PorterStemmer()
         self.web = [ps.stem(word) for word in self.web]
@@ -115,6 +118,17 @@ class infoWeb:
         for f in fragments:
             if set(f).issubset(self.web) and len(f) > 1:
                 relevant_fragments.append(f)
+
+        # Get ending statements of all relevant_fragments
+        indices = []
+        for frag in relevant_fragments:
+            for e in frag:
+                try:
+                    indices.append(self.web.index(e))
+                except ValueError:
+                    continue
+
+        
 
         return self.subvert
 
