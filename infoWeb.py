@@ -1,5 +1,6 @@
 import nltk
 from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
 import wikipedia
 
 
@@ -97,6 +98,12 @@ class infoWeb:
         wiki_page = wikipedia.page(self.subject)
         self.web = wiki_page.content
 
+        # Get stem of wiki article
+        ps = PorterStemmer()
+        self.web = [ps.stem(word) for word in self.web]
+
+        # Get stem of prompt
+        self.context = [ps.stem(word) for word in self.context]
 
     def detectSubversion(self, outcome):
         self.subvert_nodes = None
