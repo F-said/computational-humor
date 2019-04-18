@@ -13,7 +13,6 @@ class infoWeb:
 
         self.context = None
         self.web = None
-        self.subvert_nodes = None
 
         self.subvert = False
         self.humor_detected = False
@@ -106,7 +105,17 @@ class infoWeb:
         self.context = [ps.stem(word) for word in self.context]
 
     def detectSubversion(self, outcome):
-        self.subvert_nodes = None
+        fragments = []
+        # Get all subsets of prompt
+        for index, word in enumerate(self.context):
+            for i in range(index + 1, len(self.context)):
+                fragments.append(self.context[index:i])
+
+        relevant_fragments = []
+        for f in fragments:
+            if set(f).issubset(self.web) and len(f) > 1:
+                relevant_fragments.append(f)
+
         return self.subvert
 
     def detectHumor(self):
