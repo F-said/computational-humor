@@ -1,7 +1,5 @@
 # ComputationalHumor
 
-An attempt to parse humor.
-
 ![FinalProject 001](https://user-images.githubusercontent.com/26397102/75088437-33d07980-551b-11ea-8863-ea387a06a7ee.jpeg)
 
 ![FinalProject 002](https://user-images.githubusercontent.com/26397102/75088439-3a5ef100-551b-11ea-93b4-243b51d9fed2.jpeg)
