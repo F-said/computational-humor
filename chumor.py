@@ -1,4 +1,4 @@
-from infoWeb import infoWeb
+from chumor import infoWeb
 
 
 def main():
