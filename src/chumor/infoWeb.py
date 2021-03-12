@@ -166,5 +166,3 @@ class infoWeb:
         # Remove stop words from outcome
         stop = stopwords.words('english')
         self.outcome = [word.lower() for word in self.outcome if word not in stop]
-
-        # TODO: Detect difference between humorous subversion and non-humorous subversion
